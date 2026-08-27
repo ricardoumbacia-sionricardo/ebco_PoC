@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EBCO Inteligente</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#e4e4e4;
+    color:#555;
+}
+
+button,input,select{font-family:inherit}
+
+/* ================= LOGIN ================= */
+
+#login{
+    position:fixed;
+    inset:0;
+    background:#d5d5d5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.login-box{
+    width:370px;
+    background:#fff;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 8px 30px #0002;
+    text-align:center;
+}
+
+.login-logo{
+    width:170px;
+    height:105px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+
+.login-box h1{
+    margin:0;
+    color:#07502f;
+    font-size:24px;
+    font-weight:500;
+}
+
+.login-box p{
+    color:#999;
+    font-size:13px;
+    margin:7px 0 25px;
+}
+
+.login-box input{
+    width:100%;
+    height:43px;
+    margin:6px 0;
+    padding:0 12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    outline:none;
+}
+
+.login-box button{
+    width:100%;
+    height:44px;
+    margin-top:10px;
+    border:0;
+    border-radius:6px;
+    background:#078c48;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#error{
+    height:20px;
+    margin-top:8px;
+    color:#c00;
+    font-size:12px;
+}
+
+/* ================= DASHBOARD ================= */
+
+#app{
+    display:none;
+    height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+    width:285px;
+    height:100vh;
+    left:0;
+    top:0;
+    background:#c6c6c6;
+    padding:18px;
+}
+
+.logo{
+    height:105px;
+    background:#f3f3f3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:28px;
+}
+
+.logo img{
+    width:160px;
+    max-height:90px;
+    object-fit:contain;
+}
+
+.section{
+    color:white;
+    font-size:13px;
+    font-weight:bold;
+    margin:18px 0 7px;
+}
+
+.menu{
+    background:#b6b6b6;
+    border-radius:6px;
+    overflow:hidden;
+}
+
+.menu div{
+    height:45px;
+    display:flex;
+    align-items:center;
+    padding:0 15px;
+    color:white;
+    font-size:13px;
+    border-bottom:1px solid #aaa;
+}
+
+.menu div:last-child{
+    border-bottom:0;
+}
+
+.menu .active{
+    background:#aaa;
+    font-weight:bold;
+}
+
+.label{
+    font-size:12px;
+    font-weight:bold;
+    color:#444;
+    margin:17px 0 6px;
+}
+
+.sidebar select{
+    width:100%;
+    height:38px;
+    border:0;
+    border-radius:5px;
+    padding:0 10px;
+    color:#555;
+}
+
+.sidebar-footer{
+    text-align:center;
+    color:#078c48;
+    font-size:12px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:285px;
+    height:100vh;
+    padding:10px;
+    overflow:auto;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:330px minmax(450px,1fr) 300px;
+    grid-template-rows:115px 75px 165px 165px 260px;
+    gap:9px;
+    min-width:1080px;
+}
+
+/* ================= CARDS ================= */
+
+.card{
+    background:#f8f8f8;
+    border:1px solid #d6d6d6;
+    border-radius:5px;
+    padding:13px;
+}
+
+.title{
+    color:#999;
+    font-size:10px;
+    text-transform:uppercase;
+    margin-bottom:6px;
+}
+
+.value{
+    color:#888;
+    font-size:35px;
+    font-weight:300;
+}
+
+.sub{
+    color:#aaa;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.badge{
+    float:right;
+    background:#eee;
+    color:#888;
+    padding:5px 8px;
+    border-radius:12px;
+    font-size:9px;
+}
+
+.progress{
+    height:4px;
+    background:#ccc;
+    margin-top:12px;
+}
+
+.progress div{
+    height:100%;
+    background:#999;
+}
+
+/* ================= TOP ================= */
+
+.availability{
+    grid-column:1/3;
+    grid-row:1;
+}
+
+.pr{
+    grid-column:3;
+    grid-row:1;
+}
+
+/* ================= PARKS ================= */
+
+.parks{
+    grid-column:1;
+    grid-row:2/6;
+    background:#fff;
+    border:2px solid #37664c;
+    border-radius:42px;
+    position:relative;
+    overflow:hidden;
+}
+
+.parks-title{
+    text-align:center;
+    color:#222;
+    font-size:19px;
+    padding-top:17px;
+}
+
+.map{
+    position:absolute;
+    top:55px;
+    bottom:50px;
+    left:0;
+    right:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.map img{
+    width:57%;
+    max-width:230px;
+    max-height:100%;
+    object-fit:contain;
+}
+
+.dot{
+    position:absolute;
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:#777;
+    border:2px solid white;
+    box-shadow:0 0 0 1px #555;
+}
+
+.dot.santa{
+    background:#79c83b;
+}
+
+.d1{top:34%;left:50%}
+.d2{top:39%;left:53%}
+.d3{top:44%;left:47%}
+.d4{top:49%;left:52%}
+.d5{top:54%;left:47%}
+.d6{top:59%;left:51%}
+.d7{top:64%;left:47%}
+.d8{top:69%;left:51%}
+
+.country{
+    position:absolute;
+    bottom:18px;
+    width:100%;
+    text-align:center;
+    color:#888;
+    font-size:17px;
+}
+
+/* ================= KPI ================= */
+
+.kpis{
+    grid-column:2;
+    grid-row:2;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+}
+
+.kpis .card{
+    padding:12px;
+}
+
+.kpis .value{
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* ================= CHART ================= */
+
+.chart{
+    grid-column:2;
+    grid-row:3;
+}
+
+.chart-head{
+    color:#999;
+    font-size:11px;
+}
+
+.bars{
+    height:120px;
+    display:flex;
+    align-items:flex-end;
+    gap:4px;
+    border-bottom:1px solid #ccc;
+    margin-top:10px;
+}
+
+.bar{
+    flex:1;
+    background:#aaa;
+    border-radius:2px 2px 0 0;
+}
+
+/* ================= ALERTS ================= */
+
+.alerts{
+    grid-column:2;
+    grid-row:4;
+}
+
+.history{
+    grid-column:2;
+    grid-row:4;
+    margin-left:50%;
+}
+
+.row{
+    height:32px;
+    border-bottom:1px solid #eee;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:10px;
+}
+
+.green{
+    color:#16854a;
+    font-weight:bold;
+}
+
+/* ================= MAINTENANCE ================= */
+
+.maintenance{
+    grid-column:2;
+    grid-row:5;
+}
+
+.maintenance h2{
+    margin:0 0 8px;
+    color:#777;
+    font-size:18px;
+}
+
+.maint{
+    display:flex;
+    gap:10px;
+    padding:10px 0;
+    border-bottom:1px solid #eee;
+}
+
+.maint-dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:#aaa;
+    margin-top:3px;
+}
+
+.maint strong{
+    font-size:11px;
+    color:#777;
+}
+
+.maint small{
+    display:block;
+    color:#aaa;
+    font-size:9px;
+    margin-top:3px;
+}
+
+/* ================= CHAT ================= */
+
+.chat{
+    grid-column:3;
+    grid-row:2/6;
+    background:#f0ffe8;
+    border:2px solid #078c48;
+    border-radius:5px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+.chat-header{
+    background:#07502f;
+    color:#fff;
+    padding:14px;
+}
+
+.chat-title{
+    font-size:22px;
+    font-weight:400;
+}
+
+.chat-context{
+    color:#8ce54c;
+    font-size:9px;
+    margin-top:4px;
+}
+
+.context{
+    background:#f8fff4;
+    padding:8px 12px;
+    font-size:9px;
+    border-bottom:1px solid #ddd;
+}
+
+.chat-body{
+    flex:1;
+    overflow:auto;
+    padding:9px;
+}
+
+.bot{
+    background:#e3f0dc;
+    color:#344;
+    padding:10px;
+    border-radius:12px;
+    font-size:10px;
+    line-height:1.4;
+    margin-bottom:8px;
+}
+
+.user{
+    background:#138448;
+    color:white;
+    padding:10px;
+    border-radius:12px;
+    font-size:10px;
+    line-height:1.4;
+    margin:0 0 8px 15px;
+}
+
+/* BOTONES */
+
+.quick-title{
+    font-size:9px;
+    color:#777;
+    margin:9px 0 5px;
+}
+
+.quick{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:5px;
+}
+
+.quick button{
+    min-height:38px;
+    border:1px solid #239354;
+    border-radius:14px;
+    background:#fff;
+    color:#176c40;
+    font-size:9px;
+    cursor:pointer;
+    padding:5px;
+}
+
+.quick button:hover{
+    background:#e3f5d8;
+}
+
+.chat-input{
+    display:flex;
+    gap:5px;
+    padding:8px;
+    border-top:1px solid #d3ddce;
+}
+
+.chat-input input{
+    flex:1;
+    min-width:0;
+    height:40px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    padding:0 9px;
+    font-size:10px;
+    outline:none;
+}
+
+.chat-input button{
+    width:62px;
+    border:0;
+    border-radius:5px;
+    background:#0aa553;
+    color:white;
+    font-size:9px;
+    font-weight:bold;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+    .sidebar{width:220px}
+    .main{
+        margin-left:220px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+LOGIN
+===================================================== -->
+
+<div id="login">
+
+    <div class="login-box">
+
+        <img
+            src="assets/logo-ebco.png"
+            class="login-logo"
+            alt="EBCO Energía">
+
+        <h1>EBCO Inteligente</h1>
+
+        <p>Control operacional</p>
+
+        <input
+            id="username"
+            type="text"
+            placeholder="Usuario">
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password">
+
+        <button onclick="login()">
+            INGRESAR
+        </button>
+
+        <div id="error"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+APP
+===================================================== -->
+
+<div id="app">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <img
+            src="assets/logo-ebco.png"
+            alt="EBCO Energía">
+    </div>
+
+    <div class="section">
+        PRINCIPAL
+    </div>
+
+    <div class="menu">
+        <div class="active">◉ &nbsp; Resumen</div>
+        <div>▥ &nbsp; Generación</div>
+        <div>⌁ &nbsp; Disponibilidad</div>
+    </div>
+
+    <div class="section">
+        GESTIÓN
+    </div>
+
+    <div class="menu">
+        <div>▤ &nbsp; Informes</div>
+        <div>⚒ &nbsp; Mantenimiento</div>
+        <div>△ &nbsp; Alertas</div>
+    </div>
+
+    <div class="label">
+        PARQUE
+    </div>
+
+    <select id="park">
+        <option>Santa Inés</option>
+    </select>
+
+    <div class="label">
+        PERÍODO
+    </div>
+
+    <select
+        id="period"
+        onchange="changePeriod()">
+
+        <option value="dic">
+            Diciembre 2025
+        </option>
+
+        <option value="ene" selected>
+            Enero 2026
+        </option>
+
+        <option value="feb">
+            Febrero 2026
+        </option>
+
+    </select>
+
+    <div class="label">
+        USUARIO
+    </div>
+
+    <input
+        style="width:100%;height:38px;border:0;border-radius:5px;padding:0 10px"
+        value="sponsor"
+        readonly>
+
+    <div class="label">
+        PASSWORD
+    </div>
+
+    <input
+        style="width:100%;height:38px;border:0;border-radius:5px;padding:0 10px"
+        value="••••••••"
+        readonly>
+
+    <div class="sidebar-footer">
+        Producto de prueba y<br>
+        académico
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+<div class="grid">
+
+
+<!-- DISPONIBILIDAD -->
+
+<div class="card availability">
+
+    <span class="badge">
+        ✓ Cumplido
+    </span>
+
+    <div class="title">
+        Disponibilidad mensual
+    </div>
+
+    <div class="value">
+        100%
+    </div>
+
+    <div class="sub">
+        Mínimo contractual: 95%
+    </div>
+
+    <div class="progress">
+        <div style="width:100%"></div>
+    </div>
+
+</div>
+
+
+<!-- PR -->
+
+<div class="card pr">
+
+    <span class="badge">
+        FM activa
+    </span>
+
+    <div class="title">
+        Performance Ratio (PR)
+    </div>
+
+    <div class="value">
+        N/A
+    </div>
+
+    <div class="sub">
+        Limitaciones del parque
+    </div>
+
+</div>
+
+
+<!-- MAPA -->
+
+<div class="parks">
+
+    <div class="parks-title">
+        PARQUES
+    </div>
+
+    <div class="map">
+
+        <img
+            src="assets/mapa-chile.png"
+            alt="Mapa de Chile">
+
+        <span class="dot d1"></span>
+        <span class="dot d2"></span>
+        <span class="dot d3"></span>
+        <span class="dot d4"></span>
+        <span class="dot d5"></span>
+        <span class="dot d6"></span>
+        <span class="dot d7"></span>
+
+        <span
+            class="dot santa d8"
+            title="Santa Inés">
+        </span>
+
+    </div>
+
+    <div class="country">
+        CHILE
+    </div>
+
+</div>
+
+
+<!-- KPI -->
+
+<div class="kpis">
+
+    <div class="card">
+
+        <div class="title">
+            Energía generada
+        </div>
+
+        <div
+            class="value"
+            id="energy">
+            1.919 MWh
+        </div>
+
+        <div
+            class="sub"
+            id="energyVar">
+            ▼ -20,2% vs estimado
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="title">
+            Insolación
+        </div>
+
+        <div
+            class="value"
+            id="insolation">
+            265,7 kWh/m²
+        </div>
+
+        <div
+            class="sub"
+            id="insolationVar">
+            ▼ -20,3% vs estimado
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- GRÁFICO -->
+
+<div class="card chart">
+
+    <div class="chart-head">
+        Generación diaria vs insolación
+    </div>
+
+    <div
+        class="bars"
+        id="bars">
+    </div>
+
+</div>
+
+
+<!-- ALERTAS -->
+
+<div class="card alerts">
+
+    <div class="title">
+        Alertas del mes
+    </div>
+
+    <div id="alertsContent"></div>
+
+</div>
+
+
+<!-- HISTÓRICO -->
+
+<div class="card history">
+
+    <div class="title">
+        Disponibilidad histórica
+    </div>
+
+    <div class="row">
+        <span>Oct 2025</span>
+        <span class="green">100,0%</span>
+    </div>
+
+    <div class="row">
+        <span>Nov 2025</span>
+        <span class="green">100,0%</span>
+    </div>
+
+    <div class="row">
+        <span>Dic 2025</span>
+        <span class="green">100,0%</span>
+    </div>
+
+    <div class="row">
+        <span>Ene 2026</span>
+        <span class="green">100,0%</span>
+    </div>
+
+    <div class="row">
+        <span>Feb 2026</span>
+        <span class="green">100,0%</span>
+    </div>
+
+</div>
+
+
+<!-- MANTENIMIENTO -->
+
+<div class="card maintenance">
+
+    <h2>
+        Próximos mantenimientos
+    </h2>
+
+    <div class="maint">
+
+        <span class="maint-dot"></span>
+
+        <div>
+            <strong>
+                Mantención semestral de tableros
+            </strong>
+
+            <small>
+                Inspección de fijaciones y polvo interior
+            </small>
+        </div>
+
+    </div>
+
+    <div class="maint">
+
+        <span class="maint-dot"></span>
+
+        <div>
+            <strong>
+                Lavado de paneles
+            </strong>
+
+            <small>
+                Evaluación de proveedor especializado
+            </small>
+        </div>
+
+    </div>
+
+    <div class="maint">
+
+        <span class="maint-dot"></span>
+
+        <div>
+            <strong>
+                Piranómetros
+            </strong>
+
+            <small>
+                Inspecciones semanales y mensuales
+            </small>
+        </div>
+
+    </div>
+
+    <div class="maint">
+
+        <span class="maint-dot"></span>
+
+        <div>
+            <strong>
+                CCTV + Perimetral
+            </strong>
+
+            <small>
+                Monitoreo mensual
+            </small>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =================================================
+CHAT
+================================================= -->
+
+<section class="chat">
+
+    <div class="chat-header">
+
+        <div class="chat-title">
+            EBCOInteligente
+        </div>
+
+        <div class="chat-context">
+            ● Lecciones
+        </div>
+
+    </div>
+
+
+    <div
+        class="context"
+        id="context">
+
+        Santa Inés · Enero 2026
+
+    </div>
+
+
+    <div
+        class="chat-body"
+        id="chatBody">
+
+        <div class="bot">
+
+            Consulta las experiencias registradas
+            para apoyar el análisis de operación y
+            mantenimiento.
+
+        </div>
+
+
+        <div class="quick-title">
+            CONSULTAS RÁPIDAS
+        </div>
+
+
+        <div class="quick">
+
+            <button
+                onclick="quick('problemas')">
+                ¿Qué problemas se presentaron?
+            </button>
+
+            <button
+                onclick="quick('mantenimiento')">
+                ¿Qué mantenimientos se realizaron?
+            </button>
+
+            <button
+                onclick="quick('fallas')">
+                ¿Qué fallas se repitieron?
+            </button>
+
+            <button
+                onclick="quick('acciones')">
+                ¿Qué acciones se ejecutaron?
+            </button>
+
+            <button
+                onclick="quick('lecciones')">
+                ¿Qué se aprendió?
+            </button>
+
+            <button
+                onclick="quick('recomendaciones')">
+                ¿Qué recomendarías?
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="chat-input">
+
+        <input
+            id="question"
+            placeholder="Escribe tu pregunta..."
+            onkeydown="enterQuestion(event)">
+
+        <button onclick="send()">
+            ENVIAR
+        </button>
+
+    </div>
+
+</section>
+
+</div>
+</main>
+</div>
+
+
+<script>
+
+/* =========================================================
+   DATOS DE SANTA INÉS
+   Basados en los informes mensuales entregados.
+   ========================================================= */
+
+const data = {
+
+    dic:{
+        name:"Diciembre 2025",
+
+        energy:"2.145 MWh",
+        energyVar:"▼ -6,3% vs estimado",
+
+        insolation:"276,5 kWh/m²",
+        insolationVar:"▼ -10,5% vs estimado",
+
+        problems:[
+            "Generación 6,3% menor a la esperada.",
+            "Insolación 10,5% menor a la esperada.",
+            "El parque se encuentra limitado por condiciones de la red."
+        ],
+
+        maintenance:[
+            "Actividades de mantenimiento preventivo del período.",
+            "Seguimiento de condiciones operacionales del parque."
+        ],
+
+        failures:[
+            "El informe identifica restricciones asociadas a la operación del parque.",
+            "El PR no puede calcularse debido a las limitaciones existentes."
+        ],
+
+        actions:[
+            "Seguimiento de las condiciones de operación.",
+            "Continuidad del plan de mantenimiento."
+        ],
+
+        lessons:[
+            "La interpretación del desempeño debe considerar las restricciones externas del parque.",
+            "La comparación entre generación real y esperada debe analizarse junto con la insolación."
+        ],
+
+        recommendations:[
+            "Separar las pérdidas atribuibles al parque de aquellas asociadas a restricciones externas.",
+            "Mantener trazabilidad entre evento, causa y acción realizada."
+        ]
+    },
+
+
+    ene:{
+        name:"Enero 2026",
+
+        energy:"1.919 MWh",
+        energyVar:"▼ -20,2% vs estimado",
+
+        insolation:"265,7 kWh/m²",
+        insolationVar:"▼ -20,3% vs estimado",
+
+        problems:[
+            "Se registraron problemas de comunicación en GPM durante los días 08, 09, 10 y 11.",
+            "Se registró un evento EF1+ el 13/01.",
+            "El parque mantiene restricciones asociadas a la red."
+        ],
+
+        maintenance:[
+            "Inspección de TK-123.",
+            "Mantenimiento de piranómetros.",
+            "Inspección de estación meteorológica.",
+            "Mantenimiento de CCTV y perímetro.",
+            "Termografía de tableros."
+        ],
+
+        failures:[
+            "Falla de TK-123 asociada a una condición proveniente del robo ocurrido en el parque.",
+            "Se registraron períodos de pérdida de información por problemas de comunicación de GPM.",
+            "Evento EF1+ detectado el 13/01 y solucionado en terreno."
+        ],
+
+        actions:[
+            "Se solucionó la falla de TK-123.",
+            "Se realizó cambio de TCU.",
+            "Se atendió el evento EF1+ en terreno.",
+            "Se regularizaron mantenimientos pendientes para mantener trazabilidad."
+        ],
+
+        lessons:[
+            "Los eventos operacionales deben quedar asociados a una causa y a una acción de cierre.",
+            "Las pérdidas de comunicación pueden afectar la lectura y análisis posterior de los datos.",
+            "La trazabilidad del mantenimiento permite recuperar antecedentes para futuros eventos."
+        ],
+
+        recommendations:[
+            "Revisar antecedentes históricos antes de intervenir un equipo con eventos anteriores.",
+            "Mantener registro de causa, intervención y cierre.",
+            "Verificar la continuidad de las comunicaciones antes de utilizar los datos para análisis."
+        ]
+    },
+
+
+    feb:{
+        name:"Febrero 2026",
+
+        energy:"1.633 MWh",
+        energyVar:"▼ -15,5% vs estimado",
+
+        insolation:"253,1 kWh/m²",
+        insolationVar:"▼ -6,4% vs estimado",
+
+        problems:[
+            "La generación fue 15,5% menor a la esperada.",
+            "La insolación fue 6,3% menor a la esperada.",
+            "Se registran limitaciones por la red de distribución.",
+            "Se identifican problemas de comunicación de GPM+."
+        ],
+
+        maintenance:[
+            "Actividades preventivas programadas.",
+            "Seguimiento de piranómetros.",
+            "CCTV y plataforma.",
+            "Continuidad de actividades de mantenimiento del parque."
+        ],
+
+        failures:[
+            "Se registran desconexiones asociadas a PDOP y EF1+.",
+            "Persisten intervalos de pérdida de generación asociados a problemas de comunicación.",
+            "El parque continúa ajustado al 90% en control de potencia."
+        ],
+
+        actions:[
+            "Seguimiento de las restricciones de generación.",
+            "Coordinación para aumentar la limitación ante perturbaciones externas.",
+            "Continuidad del monitoreo de comunicaciones."
+        ],
+
+        lessons:[
+            "La disponibilidad y generación deben analizarse considerando las restricciones externas.",
+            "Las perturbaciones de red pueden generar desconexiones y variaciones momentáneas.",
+            "La calidad de las comunicaciones es relevante para la trazabilidad operacional."
+        ],
+
+        recommendations:[
+            "Considerar las restricciones de red antes de atribuir una desviación al desempeño del parque.",
+            "Registrar los eventos de comunicación junto con el período afectado.",
+            "Utilizar el historial de eventos para apoyar el análisis de nuevas desviaciones."
+        ]
+    }
+
+};
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+function login(){
+
+    const u =
+        document.getElementById("username").value.trim();
+
+    const p =
+        document.getElementById("password").value;
+
+    if(
+        u==="sponsor" &&
+        p==="ebco2026"
+    ){
+
+        document.getElementById("login").style.display="none";
+        document.getElementById("app").style.display="block";
+
+        updateDashboard();
+
+    }else{
+
+        document.getElementById("error").textContent =
+            "Usuario o contraseña incorrectos.";
+
+    }
+}
+
+
+/* ENTER LOGIN */
+
+document
+.getElementById("password")
+.addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+        login();
+    }
+
+});
+
+
+/* =========================================================
+   CAMBIO DE PERÍODO
+   ========================================================= */
+
+function changePeriod(){
+
+    updateDashboard();
+
+}
+
+
+/* =========================================================
+   ACTUALIZAR DASHBOARD
+   ========================================================= */
+
+function updateDashboard(){
+
+    const period =
+        document.getElementById("period").value;
+
+    const d =
+        data[period];
+
+    document.getElementById("energy").textContent =
+        d.energy;
+
+    document.getElementById("energyVar").textContent =
+        d.energyVar;
+
+    document.getElementById("insolation").textContent =
+        d.insolation;
+
+    document.getElementById("insolationVar").textContent =
+        d.insolationVar;
+
+    document.getElementById("context").innerHTML =
+        "Santa Inés · " + d.name;
+
+    const alerts =
+        document.getElementById("alertsContent");
+
+    alerts.innerHTML="";
+
+    d.problems.slice(0,3).forEach(function(x){
+
+        alerts.innerHTML +=
+            '<div class="row">'+
+            '<span>● '+x+'</span>'+
+            '</div>';
+
+    });
+
+    createBars(period);
+
+}
+
+
+/* =========================================================
+   GRÁFICO
+   ========================================================= */
+
+function createBars(period){
+
+    const bars =
+        document.getElementById("bars");
+
+    bars.innerHTML="";
+
+    let values;
+
+    if(period==="dic"){
+        values=[65,72,68,80,74,83,79,70,77,82,74,85,80,76,88,82,75,84,80,72,78,82,76,85,81,78,84,80,73,76,82];
+    }
+
+    if(period==="ene"){
+        values=[82,78,75,70,80,83,76,8,5,68,73,82,6,75,80,82,78,85,81,77,73,80,82,75,45,83,81,78,76,80,84];
+    }
+
+    if(period==="feb"){
+        values=[72,75,70,78,82,76,74,80,77,72,68,75,79,83,76,72,80,78,74,69,77,80,75,72,78,82,76,74];
+
+    }
+
+    values.forEach(function(v){
+
+        const bar =
+            document.createElement("div");
+
+        bar.className="bar";
+        bar.style.height=v+"%";
+
+        bars.appendChild(bar);
+
+    });
+
+}
+
+
+/* =========================================================
+   CHAT
+   ========================================================= */
+
+function quick(type){
+
+    const period =
+        document.getElementById("period").value;
+
+    const d =
+        data[period];
+
+    let question="";
+    let answer="";
+
+    if(type==="problemas"){
+        question="¿Qué problemas se presentaron?";
+        answer=d.problems.join("<br>• ");
+    }
+
+    if(type==="mantenimiento"){
+        question="¿Qué mantenimientos se realizaron?";
+        answer=d.maintenance.join("<br>• ");
+    }
+
+    if(type==="fallas"){
+        question="¿Qué fallas se repitieron?";
+        answer=d.failures.join("<br>• ");
+    }
+
+    if(type==="acciones"){
+        question="¿Qué acciones se ejecutaron?";
+        answer=d.actions.join("<br>• ");
+    }
+
+    if(type==="lecciones"){
+        question="¿Qué se aprendió?";
+        answer=d.lessons.join("<br>• ");
+    }
+
+    if(type==="recomendaciones"){
+        question="¿Qué recomendarías?";
+        answer=d.recommendations.join("<br>• ");
+    }
+
+    addUser(question);
+
+    setTimeout(function(){
+
+        addBot("• "+answer);
+
+    },250);
+
+}
+
+
+function send(){
+
+    const input =
+        document.getElementById("question");
+
+    const question =
+        input.value.trim();
+
+    if(!question)return;
+
+    input.value="";
+
+    addUser(question);
+
+    setTimeout(function(){
+
+        addBot(answerQuestion(question));
+
+    },250);
+
+}
+
+
+function answerQuestion(question){
+
+    const period =
+        document.getElementById("period").value;
+
+    const d =
+        data[period];
+
+    const q =
+        question.toLowerCase();
+
+    if(
+        q.includes("problema") ||
+        q.includes("ocurrió") ||
+        q.includes("pasó")
+    ){
+
+        return "• "+d.problems.join("<br>• ");
+
+    }
+
+    if(
+        q.includes("mantenimiento") ||
+        q.includes("preventivo")
+    ){
+
+        return "• "+d.maintenance.join("<br>• ");
+
+    }
+
+    if(
+        q.includes("falla") ||
+        q.includes("evento") ||
+        q.includes("desconex")
+    ){
+
+        return "• "+d.failures.join("<br>• ");
+
+    }
+
+    if(
+        q.includes("acción") ||
+        q.includes("solucion") ||
+        q.includes("hicieron")
+    ){
+
+        return "• "+d.actions.join("<br>• ");
+
+    }
+
+    if(
+        q.includes("aprend") ||
+        q.includes("lección")
+    ){
+
+        return "• "+d.lessons.join("<br>• ");
+
+    }
+
+    if(
+        q.includes("recomend") ||
+        q.includes("similar")
+    ){
+
+        return "• "+d.recommendations.join("<br>• ");
+
+    }
+
+    return "Puedo consultar problemas, mantenimientos, fallas, acciones, lecciones y recomendaciones del período seleccionado.";
+
+}
+
+
+function addUser(text){
+
+    const body =
+        document.getElementById("chatBody");
+
+    const div =
+        document.createElement("div");
+
+    div.className="user";
+    div.textContent=text;
+
+    body.appendChild(div);
+
+    body.scrollTop=body.scrollHeight;
+
+}
+
+
+function addBot(text){
+
+    const body =
+        document.getElementById("chatBody");
+
+    const div =
+        document.createElement("div");
+
+    div.className="bot";
+    div.innerHTML=text;
+
+    body.appendChild(div);
+
+    body.scrollTop=body.scrollHeight;
+
+}
+
+
+function enterQuestion(e){
+
+    if(e.key==="Enter"){
+        send();
+    }
+
+}
+
+</script>
+
+</body>
+</html>
