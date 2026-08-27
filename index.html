@@ -12,98 +12,76 @@
     box-sizing:border-box;
 }
 
-html,body{
+body{
     margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#e9e9e9;
-    color:#555;
-}
-
-button,
-input,
-select{
-    font-family:inherit;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#e5e5e5;
+    color:#666;
 }
 
 /* =========================================================
-   CONTENEDOR GENERAL
+   CONTENEDOR PRINCIPAL
 ========================================================= */
 
-.app{
-    display:flex;
-    width:100%;
+.dashboard{
+    display:grid;
+    grid-template-columns:260px 1fr 310px;
     min-height:100vh;
+    gap:10px;
+    padding:8px;
 }
 
 /* =========================================================
-   SIDEBAR
+   PANEL IZQUIERDO
 ========================================================= */
 
 .sidebar{
-    width:265px;
-    min-width:265px;
-    background:#c9c9c9;
-    padding:18px 8px 12px 8px;
+    background:#c6c6c6;
+    padding:0;
     display:flex;
     flex-direction:column;
+    min-height:calc(100vh - 16px);
 }
 
 .logo-box{
     height:100px;
     background:#fff;
-    margin-bottom:18px;
+    margin-bottom:10px;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     overflow:hidden;
 }
 
 .logo-box img{
     max-width:85%;
-    max-height:72px;
+    max-height:75px;
     object-fit:contain;
 }
 
-.logo-fallback{
-    color:#006d3a;
-    font-size:23px;
+/* navegación */
+
+.section-title{
+    color:white;
     font-weight:bold;
-}
-
-/* MENÚ */
-
-.menu-title{
-    color:#fff;
     font-size:14px;
-    font-weight:bold;
-    margin:8px 0 7px 0;
+    padding:8px 5px 5px;
 }
 
-.menu-group{
-    margin-bottom:16px;
+.menu{
+    margin-bottom:5px;
 }
 
 .menu-item{
     height:44px;
-    background:#b3b3b3;
+    background:#b5b5b5;
     border-bottom:1px solid #aaa;
+    color:white;
     display:flex;
     align-items:center;
-    padding:0 14px;
-    color:#fff;
-    font-size:14px;
+    padding:0 15px;
     cursor:pointer;
-}
-
-.menu-item:first-child{
-    border-radius:6px 6px 0 0;
-}
-
-.menu-item:last-child{
-    border-radius:0 0 6px 6px;
+    font-size:14px;
 }
 
 .menu-item:hover{
@@ -111,356 +89,326 @@ select{
 }
 
 .menu-item.active{
-    background:#a8a8a8;
+    background:#a9a9a9;
     font-weight:bold;
 }
 
 .menu-icon{
     width:22px;
-    color:#fff;
+    color:white;
 }
 
-/* FILTROS */
+/* filtros */
+
+.filters{
+    margin-top:5px;
+    padding:0 5px;
+}
 
 .filter-label{
-    color:#fff;
-    font-size:13px;
+    color:#333;
+    font-size:12px;
     font-weight:bold;
-    margin:8px 0 6px;
+    margin:12px 0 6px;
 }
 
 select,
-.user-input{
+input{
     width:100%;
-    height:38px;
     border:none;
     border-radius:5px;
-    padding:0 10px;
-    background:#fff;
-    color:#555;
-    font-size:14px;
-}
-
-.user-input{
-    margin-bottom:8px;
-}
-
-.login-label{
-    color:#fff;
+    background:white;
+    padding:11px;
     font-size:13px;
-    font-weight:bold;
-    margin-top:10px;
-    margin-bottom:5px;
+    color:#555;
 }
 
-.login-button{
-    width:100%;
-    margin-top:8px;
-    background:#007c45;
-    color:#fff;
-    border:none;
-    border-radius:5px;
-    padding:9px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.login-button:hover{
-    background:#006738;
-}
-
-.academic{
-    color:#008447;
+.footer-note{
+    margin-top:auto;
     text-align:center;
+    color:#009447;
     font-weight:bold;
     font-size:12px;
-    margin-top:auto;
-    padding-top:12px;
+    padding:20px 10px;
 }
 
 /* =========================================================
-   CONTENIDO PRINCIPAL
+   ÁREA CENTRAL
 ========================================================= */
 
 .main{
-    flex:1;
-    padding:10px;
     min-width:0;
 }
 
-/* GRID */
+/* KPI superior */
 
-.dashboard-grid{
+.top-grid{
     display:grid;
-    grid-template-columns: 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr;
-    grid-template-rows:auto auto auto 1fr;
+    grid-template-columns:1fr 250px;
     gap:10px;
+    margin-bottom:10px;
 }
-
-/* =========================================================
-   CARDS
-========================================================= */
 
 .card{
     background:#fff;
-    border-radius:5px;
-    padding:14px;
-    box-shadow:0 1px 2px rgba(0,0,0,.05);
+    border-radius:6px;
+    padding:12px;
+    box-shadow:0 1px 2px rgba(0,0,0,.08);
 }
 
-.card-title{
+.kpi-title{
     color:#999;
     font-size:11px;
     text-transform:uppercase;
-    margin-bottom:5px;
+    margin-bottom:4px;
 }
 
-.big-number{
-    font-size:31px;
-    color:#8a8a8a;
-    line-height:1.1;
+.kpi-value{
+    color:#777;
+    font-size:34px;
+    font-weight:normal;
 }
 
-.small-text{
-    color:#aaa;
+.kpi-subtitle{
     font-size:11px;
+    color:#aaa;
     margin-top:4px;
 }
 
-.green{
-    color:#008447;
-}
-
-.red{
-    color:#c94b4b;
-}
-
-.gray{
-    color:#999;
-}
-
-/* =========================================================
-   DISPONIBILIDAD
-========================================================= */
-
-.availability{
-    grid-column:1 / 5;
-    min-height:105px;
-    position:relative;
+.progress{
+    height:4px;
+    background:#999;
+    margin-top:12px;
 }
 
 .status{
-    position:absolute;
-    right:15px;
-    top:13px;
-    background:#f1f1f1;
-    color:#999;
-    padding:5px 9px;
-    border-radius:15px;
+    float:right;
+    background:#f0f0f0;
+    border-radius:12px;
+    padding:4px 8px;
     font-size:10px;
-}
-
-.progress{
-    width:100%;
-    height:4px;
-    background:#aaa;
-    margin-top:11px;
+    color:#888;
 }
 
 /* =========================================================
-   PR
+   MAPA + KPIS
 ========================================================= */
 
-.pr-card{
-    grid-column:5;
-    min-height:105px;
+.content-grid{
+    display:grid;
+    grid-template-columns:315px 1fr;
+    gap:10px;
 }
 
-/* =========================================================
-   MAPA
-========================================================= */
+/* mapa */
 
 .map-card{
-    grid-column:1;
-    grid-row:2 / 5;
-    min-height:600px;
-    border:2px solid #357b5b;
-    border-radius:38px;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
     background:#fff;
+    border:2px solid #37785c;
+    border-radius:40px;
+    min-height:655px;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 .map-title{
-    position:absolute;
-    top:20px;
-    left:0;
-    width:100%;
-    text-align:center;
-    font-size:20px;
-    color:#333;
-    z-index:2;
+    color:#222;
+    font-size:21px;
+    margin-top:15px;
+    margin-bottom:8px;
 }
 
-.map-image{
-    width:82%;
-    height:82%;
-    object-fit:contain;
-    opacity:.95;
+.map-container{
+    position:relative;
+    flex:1;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
+
+.map-container img{
+    width:230px;
+    max-width:80%;
+    max-height:520px;
+    object-fit:contain;
+}
+
+/* fallback visual si la imagen no carga */
 
 .map-fallback{
+    position:absolute;
+    inset:0;
     display:none;
-    text-align:center;
-    color:#999;
-    font-size:14px;
+    align-items:center;
+    justify-content:center;
+    color:#aaa;
+    font-size:13px;
+}
+
+.map-country{
+    position:absolute;
+    bottom:18px;
+    font-size:18px;
+    color:#777;
 }
 
 /* =========================================================
-   KPI SUPERIORES
+   ZONA DERECHA CENTRAL
 ========================================================= */
 
-.kpi-area{
-    grid-column:2 / 5;
-    grid-row:2;
+.center-area{
+    min-width:0;
+}
+
+.small-kpis{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
 }
 
-.kpi-card{
-    min-height:80px;
+.small-kpi{
+    height:85px;
 }
 
-/* =========================================================
-   GRÁFICO
-========================================================= */
+.small-value{
+    font-size:24px;
+    font-weight:bold;
+    color:#777;
+}
+
+.variation{
+    font-size:11px;
+    color:#aaa;
+    margin-top:3px;
+}
+
+/* gráfico */
 
 .chart-card{
-    grid-column:2 / 5;
-    grid-row:3;
-    min-height:150px;
+    margin-top:10px;
+    height:165px;
 }
 
 .chart-title{
-    font-size:11px;
+    font-size:12px;
     color:#999;
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .chart{
-    height:105px;
+    height:115px;
     display:flex;
     align-items:flex-end;
     gap:4px;
-    padding:0 3px;
-    border-bottom:1px solid #ddd;
+    padding:5px 2px 0;
+    overflow:hidden;
 }
 
 .bar{
     flex:1;
+    min-width:5px;
     background:#aaa;
-    min-width:4px;
     border-radius:2px 2px 0 0;
-}
-
-.bar:hover{
-    background:#008447;
 }
 
 /* =========================================================
    ALERTAS
 ========================================================= */
 
-.alerts-card{
-    grid-column:2 / 4;
-    grid-row:4;
-    min-height:205px;
+.alert-history{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    margin-top:10px;
 }
 
-.section-title{
-    font-size:20px;
-    font-weight:bold;
-    color:#777;
-    margin-bottom:14px;
+.alerts{
+    min-height:165px;
+}
+
+.history{
+    min-height:165px;
+    border-left:1px solid #ddd;
+}
+
+.block-title{
+    font-size:11px;
+    color:#999;
+    text-transform:uppercase;
+    margin-bottom:10px;
 }
 
 .alert{
-    padding:8px 0;
-    border-bottom:1px solid #eee;
-    font-size:12px;
+    font-size:11px;
     color:#666;
-}
-
-.alert:last-child{
-    border-bottom:none;
+    padding:7px 0;
+    border-bottom:1px solid #eee;
 }
 
 .alert::before{
     content:"•";
-    color:#555;
-    margin-right:5px;
-}
-
-/* =========================================================
-   HISTÓRICO
-========================================================= */
-
-.history-card{
-    grid-column:4 / 5;
-    grid-row:4;
-    min-height:205px;
+    color:#666;
+    margin-right:7px;
 }
 
 .history-row{
     display:flex;
     justify-content:space-between;
-    padding:8px 0;
+    padding:7px 0;
     border-bottom:1px solid #eee;
-    font-size:12px;
+    font-size:11px;
 }
 
-.history-row strong{
-    color:#008447;
+.history-value{
+    color:#008b4c;
+    font-weight:bold;
 }
 
 /* =========================================================
    MANTENIMIENTOS
 ========================================================= */
 
-.maintenance-card{
-    grid-column:2 / 5;
-    grid-row:5;
-    min-height:250px;
+.maintenance{
+    margin-top:10px;
+    min-height:245px;
 }
 
-.maintenance{
+.maintenance h2{
+    margin:0 0 10px;
+    font-size:21px;
+    color:#777;
+}
+
+.maintenance-row{
     display:flex;
     align-items:flex-start;
-    padding:10px 0;
+    gap:12px;
+    padding:9px 0;
     border-bottom:1px solid #eee;
 }
 
 .dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
+    width:12px;
+    height:12px;
     background:#aaa;
-    margin:6px 12px 0 0;
+    border-radius:50%;
+    margin-top:3px;
+    flex-shrink:0;
 }
 
-.maintenance-name{
+.maintenance-title{
+    font-size:12px;
     font-weight:bold;
     color:#777;
-    font-size:13px;
 }
 
-.maintenance-detail{
+.maintenance-description{
+    font-size:10px;
     color:#aaa;
-    font-size:11px;
     margin-top:3px;
 }
 
@@ -469,240 +417,215 @@ select,
 ========================================================= */
 
 .ai-panel{
-    grid-column:5;
-    grid-row:2 / 6;
-    background:#ecf9e9;
-    border:2px solid #008447;
+    background:#efffe9;
+    border:2px solid #008b4c;
     border-radius:6px;
+    min-height:calc(100vh - 16px);
     overflow:hidden;
     display:flex;
     flex-direction:column;
-    min-height:700px;
 }
 
 .ai-header{
-    background:#006b3c;
+    background:#006b3d;
     color:white;
     padding:15px;
 }
 
 .ai-title{
     font-size:21px;
-    font-weight:normal;
 }
 
 .ai-subtitle{
     font-size:11px;
+    color:#b9e8ce;
     margin-top:3px;
 }
 
 .ai-context{
-    background:#e0f2d8;
+    background:#e4f4dc;
     margin:10px;
-    padding:11px;
-    border-radius:7px;
-    color:#55704f;
+    padding:12px;
+    border-radius:12px;
     font-size:11px;
     line-height:1.4;
+    color:#666;
 }
 
 .quick-title{
-    padding:0 10px 7px;
-    color:#66805f;
+    margin:0 10px 7px;
     font-size:10px;
+    color:#777;
     text-transform:uppercase;
 }
 
 .quick-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:7px;
+    gap:6px;
     padding:0 10px;
 }
 
 .quick-btn{
-    border:1px solid #55a873;
-    background:#fff;
-    color:#367950;
+    background:white;
+    border:1px solid #52ae7c;
     border-radius:20px;
-    padding:7px 5px;
+    padding:8px 5px;
     font-size:10px;
+    color:#38815c;
     cursor:pointer;
 }
 
 .quick-btn:hover{
-    background:#dff2dd;
+    background:#e7f7e9;
 }
 
-.ai-content{
-    padding:8px 10px;
-    overflow:auto;
-    flex:1;
+.ai-response{
+    margin:10px;
 }
 
-.question{
-    background:#008447;
-    color:#fff;
-    border-radius:15px;
-    padding:9px 13px;
+.response-title{
+    background:#078a4b;
+    color:white;
+    padding:9px 12px;
+    border-radius:16px;
     font-size:11px;
-    margin:8px 0;
+    margin-bottom:6px;
 }
 
-.answer{
-    background:#dff0d8;
-    color:#55704f;
-    padding:11px;
-    border-radius:5px;
+.response-box{
+    background:#e0f1d8;
+    border-radius:12px;
+    padding:12px;
     font-size:11px;
     line-height:1.5;
+    color:#555;
 }
 
-.answer ul{
-    margin:4px 0;
-    padding-left:17px;
+.response-box ul{
+    padding-left:18px;
+    margin:5px 0;
 }
 
-.chat{
+.chat-area{
+    margin-top:auto;
+    padding:10px;
     display:flex;
     gap:5px;
-    padding:10px;
-    background:#e9f9e6;
+    background:#efffe9;
 }
 
-.chat input{
+.chat-input{
     flex:1;
-    height:38px;
-    border:1px solid #ccc;
-    border-radius:5px;
-    padding:0 10px;
+    border:1px solid #ddd;
+    font-size:11px;
 }
 
-.chat button{
-    width:65px;
+.send-btn{
+    background:#009447;
     border:none;
-    background:#008447;
     color:white;
-    border-radius:5px;
     font-weight:bold;
+    padding:0 15px;
+    border-radius:4px;
     cursor:pointer;
+}
+
+.send-btn:hover{
+    background:#007a3d;
 }
 
 /* =========================================================
    RESPONSIVE
 ========================================================= */
 
-@media(max-width:1200px){
+@media(max-width:1100px){
 
-    .sidebar{
-        width:220px;
-        min-width:220px;
-    }
-
-    .dashboard-grid{
-        grid-template-columns:1fr 1fr 1fr;
-    }
-
-    .availability{
-        grid-column:1 / 3;
-    }
-
-    .pr-card{
-        grid-column:3;
-    }
-
-    .map-card{
-        grid-column:1;
-        grid-row:auto;
-        min-height:450px;
-    }
-
-    .kpi-area{
-        grid-column:2 / 4;
-        grid-row:auto;
-    }
-
-    .chart-card{
-        grid-column:2 / 4;
-        grid-row:auto;
-    }
-
-    .alerts-card,
-    .history-card,
-    .maintenance-card,
-    .ai-panel{
-        grid-column:auto;
-        grid-row:auto;
+    .dashboard{
+        grid-template-columns:220px 1fr;
     }
 
     .ai-panel{
-        min-height:600px;
+        grid-column:1 / -1;
+        min-height:500px;
     }
+
 }
 
-@media(max-width:850px){
+@media(max-width:800px){
 
-    .app{
-        flex-direction:column;
-    }
-
-    .sidebar{
-        width:100%;
-        min-width:0;
-    }
-
-    .academic{
-        margin-top:15px;
-    }
-
-    .dashboard-grid{
+    .dashboard{
         display:block;
     }
 
-    .card{
+    .sidebar{
+        min-height:auto;
         margin-bottom:10px;
     }
 
-    .map-card{
-        min-height:450px;
+    .content-grid{
+        grid-template-columns:1fr;
     }
 
-    .ai-panel{
-        min-height:600px;
+    .map-card{
+        min-height:500px;
     }
+
+    .top-grid{
+        grid-template-columns:1fr;
+    }
+
+    .alert-history{
+        grid-template-columns:1fr;
+    }
+
+    .history{
+        border-left:none;
+        border-top:1px solid #ddd;
+    }
+
 }
 
 </style>
 </head>
 
+
 <body>
 
-<div class="app">
+<div class="dashboard">
 
 <!-- =====================================================
      SIDEBAR
-====================================================== -->
+===================================================== -->
 
 <aside class="sidebar">
 
     <div class="logo-box">
 
+        <!-- IMPORTANTE:
+             El archivo debe llamarse exactamente:
+             Ebco Logo.jpg
+        -->
+
         <img
             src="./Ebco%20Logo.jpg"
             alt="EBCO Energía"
-            onerror="this.style.display='none';document.getElementById('logoFallback').style.display='block';"
+            onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';"
         >
 
-        <div id="logoFallback" class="logo-fallback" style="display:none;">
-            EBCO EnergÍA
+        <div id="logoFallback"
+             style="display:none;color:#777;font-size:16px;">
+            EBCO Energía
         </div>
 
     </div>
 
 
-    <div class="menu-title">PRINCIPAL</div>
+    <div class="section-title">
+        PRINCIPAL
+    </div>
 
-    <div class="menu-group">
+    <div class="menu">
 
         <div class="menu-item active">
             <span class="menu-icon">◉</span>
@@ -722,9 +645,11 @@ select,
     </div>
 
 
-    <div class="menu-title">GESTIÓN</div>
+    <div class="section-title">
+        GESTIÓN
+    </div>
 
-    <div class="menu-group">
+    <div class="menu">
 
         <div class="menu-item">
             <span class="menu-icon">▤</span>
@@ -744,55 +669,61 @@ select,
     </div>
 
 
-    <div class="filter-label">PARQUE</div>
+    <div class="filters">
 
-    <select id="parque">
-        <option>Santa Inés</option>
-        <option>Monte Patria</option>
-        <option>Catemu</option>
-        <option>Rengo</option>
-        <option>Talca</option>
-        <option>Santa Cruz</option>
-    </select>
+        <div class="filter-label">
+            PARQUE
+        </div>
 
-
-    <div class="filter-label">PERÍODO</div>
-
-    <select id="periodo">
-        <option>Febrero 2026</option>
-        <option>Enero 2026</option>
-        <option>Diciembre 2025</option>
-    </select>
+        <select id="parkSelect">
+            <option>Santa Inés</option>
+            <option>Parque Solar 2</option>
+            <option>Parque Solar 3</option>
+        </select>
 
 
-    <div class="login-label">USUARIO</div>
+        <div class="filter-label">
+            PERÍODO
+        </div>
 
-    <input
-        class="user-input"
-        type="text"
-        value="sponsor"
-        id="usuario"
-    >
+        <select id="periodSelect">
 
+            <option>Enero 2026</option>
+            <option>Febrero 2026</option>
+            <option>Diciembre 2025</option>
+            <option>Noviembre 2025</option>
+            <option>Octubre 2025</option>
 
-    <div class="login-label">PASSWORD</div>
-
-    <input
-        class="user-input"
-        type="password"
-        value="12345678"
-        id="password"
-    >
+        </select>
 
 
-    <button class="login-button" onclick="login()">
-        INGRESAR
-    </button>
+        <div class="filter-label">
+            USUARIO
+        </div>
+
+        <input
+            type="text"
+            value="sponsor"
+            readonly
+        >
 
 
-    <div class="academic">
+        <div class="filter-label">
+            PASSWORD
+        </div>
+
+        <input
+            type="password"
+            value="password"
+            readonly
+        >
+
+    </div>
+
+
+    <div class="footer-note">
         Producto de prueba y<br>
-        uso académico
+        académico
     </div>
 
 </aside>
@@ -800,428 +731,465 @@ select,
 
 <!-- =====================================================
      MAIN
-====================================================== -->
+===================================================== -->
 
 <main class="main">
 
-<div class="dashboard-grid">
 
-    <!-- DISPONIBILIDAD -->
+    <!-- KPI SUPERIOR -->
 
-    <section class="card availability">
+    <div class="top-grid">
 
-        <div class="status">
-            ✓ Cumplido
-        </div>
+        <div class="card">
 
-        <div class="card-title">
-            Disponibilidad mensual
-        </div>
+            <span class="status">
+                ✓ Cumplido
+            </span>
 
-        <div class="big-number">
-            100%
-        </div>
-
-        <div class="small-text">
-            Mínimo contractual: 95%
-        </div>
-
-        <div class="progress"></div>
-
-    </section>
-
-
-    <!-- PERFORMANCE RATIO -->
-
-    <section class="card pr-card">
-
-        <div class="status">
-            FM activa
-        </div>
-
-        <div class="card-title">
-            Performance Ratio (PR)
-        </div>
-
-        <div class="big-number">
-            N/A
-        </div>
-
-        <div class="small-text">
-            Limitaciones del parque
-        </div>
-
-    </section>
-
-
-    <!-- MAPA -->
-
-    <section class="map-card">
-
-        <div class="map-title">
-            PARQUES
-        </div>
-
-        <img
-            class="map-image"
-            src="./Chile_mapa.jpg"
-            alt="Mapa de Chile"
-            onerror="this.style.display='none';document.getElementById('mapFallback').style.display='block';"
-        >
-
-        <div id="mapFallback" class="map-fallback">
-            <strong>Mapa de Chile</strong><br><br>
-            No se pudo cargar la imagen.<br>
-            Verifica que el archivo<br>
-            <b>Chile_mapa.jpg</b><br>
-            esté en la raíz del repositorio.
-        </div>
-
-    </section>
-
-
-    <!-- KPIs -->
-
-    <section class="kpi-area">
-
-        <div class="card kpi-card">
-
-            <div class="card-title">
-                Energía generada
+            <div class="kpi-title">
+                Disponibilidad mensual
             </div>
 
-            <div class="big-number">
-                1.633 MWh
+            <div class="kpi-value">
+                100%
             </div>
 
-            <div class="small-text red">
-                ▼ -15,5% vs estimado
+            <div class="kpi-subtitle">
+                Mínimo contractual: 95%
+            </div>
+
+            <div class="progress"></div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="kpi-title">
+                Performance Ratio (PR)
+            </div>
+
+            <div class="kpi-value">
+                N/A
+            </div>
+
+            <div class="kpi-subtitle">
+                Limitaciones del parque
             </div>
 
         </div>
 
+    </div>
 
-        <div class="card kpi-card">
 
-            <div class="card-title">
-                Insolación
+    <!-- MAPA + DATOS -->
+
+    <div class="content-grid">
+
+
+        <!-- MAPA -->
+
+        <section class="map-card">
+
+            <div class="map-title">
+                PARQUES
             </div>
 
-            <div class="big-number">
-                253,1 kWh/m²
-            </div>
+            <div class="map-container">
 
-            <div class="small-text red">
-                ▼ -6,4% vs estimado
-            </div>
+                <!-- IMPORTANTE:
+                     El archivo debe llamarse exactamente:
+                     Chile_mapa.jpg
+                -->
 
-        </div>
+                <img
+                    src="./Chile_mapa.jpg"
+                    alt="Mapa de Chile"
+                    onerror="this.style.display='none'; document.getElementById('mapFallback').style.display='flex';"
+                >
 
-    </section>
-
-
-    <!-- GRÁFICO -->
-
-    <section class="card chart-card">
-
-        <div class="chart-title">
-            Generación diaria vs insolación
-        </div>
-
-        <div class="chart" id="chart"></div>
-
-    </section>
-
-
-    <!-- ALERTAS -->
-
-    <section class="card alerts-card">
-
-        <div class="card-title">
-            Alertas del mes
-        </div>
-
-        <div class="alert">
-            La generación fue 15,5% menor a la esperada.
-        </div>
-
-        <div class="alert">
-            La insolación fue 6,3% menor a la esperada.
-        </div>
-
-        <div class="alert">
-            Se registran limitaciones por la red de distribución.
-        </div>
-
-    </section>
-
-
-    <!-- HISTÓRICO -->
-
-    <section class="card history-card">
-
-        <div class="card-title">
-            Disponibilidad histórica
-        </div>
-
-        <div class="history-row">
-            <span>Oct 2025</span>
-            <strong>100,0%</strong>
-        </div>
-
-        <div class="history-row">
-            <span>Nov 2025</span>
-            <strong>100,0%</strong>
-        </div>
-
-        <div class="history-row">
-            <span>Dic 2025</span>
-            <strong>100,0%</strong>
-        </div>
-
-        <div class="history-row">
-            <span>Ene 2026</span>
-            <strong>100,0%</strong>
-        </div>
-
-        <div class="history-row">
-            <span>Feb 2026</span>
-            <strong>100,0%</strong>
-        </div>
-
-    </section>
-
-
-    <!-- MANTENIMIENTOS -->
-
-    <section class="card maintenance-card">
-
-        <div class="section-title">
-            Próximos mantenimientos
-        </div>
-
-
-        <div class="maintenance">
-
-            <div class="dot"></div>
-
-            <div>
-                <div class="maintenance-name">
-                    Mantención semestral de tableros
+                <div
+                    id="mapFallback"
+                    class="map-fallback"
+                >
+                    Mapa de Chile
                 </div>
 
-                <div class="maintenance-detail">
-                    Inspección de fijaciones y polvo interior
-                </div>
             </div>
 
-        </div>
-
-
-        <div class="maintenance">
-
-            <div class="dot"></div>
-
-            <div>
-                <div class="maintenance-name">
-                    Lavado de paneles
-                </div>
-
-                <div class="maintenance-detail">
-                    Evaluación de proveedor especializado
-                </div>
+            <div class="map-country">
+                CHILE
             </div>
 
-        </div>
+        </section>
 
 
-        <div class="maintenance">
+        <!-- DATOS -->
 
-            <div class="dot"></div>
-
-            <div>
-                <div class="maintenance-name">
-                    Piranómetros
-                </div>
-
-                <div class="maintenance-detail">
-                    Inspecciones semanales y mensuales
-                </div>
-            </div>
-
-        </div>
+        <div class="center-area">
 
 
-        <div class="maintenance">
+            <!-- KPI GENERACIÓN / INSOLACIÓN -->
 
-            <div class="dot"></div>
+            <div class="small-kpis">
 
-            <div>
-                <div class="maintenance-name">
-                    CCTV + Perimetral
+                <div class="card small-kpi">
+
+                    <div class="kpi-title">
+                        Energía generada
+                    </div>
+
+                    <div class="small-value">
+                        1.919 MWh
+                    </div>
+
+                    <div class="variation">
+                        ▼ -20,2% vs estimado
+                    </div>
+
                 </div>
 
-                <div class="maintenance-detail">
-                    Monitoreo mensual
+
+                <div class="card small-kpi">
+
+                    <div class="kpi-title">
+                        Insolación
+                    </div>
+
+                    <div class="small-value">
+                        265,7 kWh/m²
+                    </div>
+
+                    <div class="variation">
+                        ▼ -20,3% vs estimado
+                    </div>
+
                 </div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         EBCO INTELIGENTE
-    ================================================== -->
-
-    <aside class="ai-panel">
-
-        <div class="ai-header">
-
-            <div class="ai-title">
-                EBCOInteligente
-            </div>
-
-            <div class="ai-subtitle">
-                ● Lecciones
-            </div>
-
-        </div>
-
-
-        <div class="ai-context">
-
-            <strong>Santa Inés · Febrero 2026</strong>
-
-            <br><br>
-
-            Consulta las experiencias registradas para apoyar
-            el análisis de operación y mantenimiento.
-
-        </div>
-
-
-        <div class="quick-title">
-            Consultas rápidas
-        </div>
-
-
-        <div class="quick-grid">
-
-            <button
-                class="quick-btn"
-                onclick="askAI('¿Qué problemas se presentaron?')">
-                ¿Qué problemas se presentaron?
-            </button>
-
-            <button
-                class="quick-btn"
-                onclick="askAI('¿Qué mantenimientos realizaron?')">
-                ¿Qué mantenimientos se realizaron?
-            </button>
-
-            <button
-                class="quick-btn"
-                onclick="askAI('¿Qué fallas se repitieron?')">
-                ¿Qué fallas se repitieron?
-            </button>
-
-            <button
-                class="quick-btn"
-                onclick="askAI('¿Qué acciones se ejecutaron?')">
-                ¿Qué acciones se ejecutaron?
-            </button>
-
-            <button
-                class="quick-btn"
-                onclick="askAI('¿Qué se aprendió?')">
-                ¿Qué se aprendió?
-            </button>
-
-            <button
-                class="quick-btn"
-                onclick="askAI('¿Qué recomendarías?')">
-                ¿Qué recomendarías?
-            </button>
-
-        </div>
-
-
-        <div class="ai-content" id="aiContent">
-
-            <div class="question">
-                ¿Qué se aprendió?
-            </div>
-
-            <div class="answer">
-
-                <ul>
-                    <li>
-                        La disponibilidad y generación deben
-                        analizarse considerando las restricciones externas.
-                    </li>
-
-                    <li>
-                        Las perturbaciones de red pueden generar
-                        desconexiones y variaciones momentáneas.
-                    </li>
-
-                    <li>
-                        La calidad de las comunicaciones es relevante
-                        para la trazabilidad operacional.
-                    </li>
-                </ul>
 
             </div>
 
 
-            <div class="question">
-                ¿Qué fallas se repitieron?
+            <!-- GRÁFICO -->
+
+            <div class="card chart-card">
+
+                <div class="chart-title">
+                    Generación diaria vs insolación
+                </div>
+
+                <div
+                    class="chart"
+                    id="chart"
+                ></div>
+
             </div>
 
-            <div class="answer">
 
-                <ul>
-                    <li>
-                        Se registran desconexiones asociadas a PDOP y EF1+.
-                    </li>
+            <!-- ALERTAS / HISTÓRICO -->
 
-                    <li>
-                        Persisten intervalos de pérdida de generación
-                        asociados a problemas de comunicación.
-                    </li>
+            <div class="alert-history">
 
-                    <li>
-                        El parque continúa ajustado al 90% en control de potencia.
-                    </li>
-                </ul>
+
+                <div class="card alerts">
+
+                    <div class="block-title">
+                        Alertas del mes
+                    </div>
+
+                    <div class="alert">
+                        Se registraron problemas de comunicación en GPM durante los días 08, 09 y 10.
+                    </div>
+
+                    <div class="alert">
+                        Se registró un evento EF1+ el 13/01.
+                    </div>
+
+                    <div class="alert">
+                        El parque mantiene restricciones asociadas a la red.
+                    </div>
+
+                </div>
+
+
+                <div class="card history">
+
+                    <div class="block-title">
+                        Disponibilidad histórica
+                    </div>
+
+                    <div class="history-row">
+                        <span>Oct 2025</span>
+                        <span class="history-value">100,0%</span>
+                    </div>
+
+                    <div class="history-row">
+                        <span>Nov 2025</span>
+                        <span class="history-value">100,0%</span>
+                    </div>
+
+                    <div class="history-row">
+                        <span>Dic 2025</span>
+                        <span class="history-value">100,0%</span>
+                    </div>
+
+                    <div class="history-row">
+                        <span>Ene 2026</span>
+                        <span class="history-value">100,0%</span>
+                    </div>
+
+                    <div class="history-row">
+                        <span>Feb 2026</span>
+                        <span class="history-value">100,0%</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MANTENIMIENTOS -->
+
+            <div class="card maintenance">
+
+                <h2>
+                    Próximos mantenimientos
+                </h2>
+
+
+                <div class="maintenance-row">
+
+                    <div class="dot"></div>
+
+                    <div>
+
+                        <div class="maintenance-title">
+                            Mantención semestral de tableros
+                        </div>
+
+                        <div class="maintenance-description">
+                            Inspección de fijaciones y polvo interior
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="maintenance-row">
+
+                    <div class="dot"></div>
+
+                    <div>
+
+                        <div class="maintenance-title">
+                            Lavado de paneles
+                        </div>
+
+                        <div class="maintenance-description">
+                            Evaluación de proveedor especializado
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="maintenance-row">
+
+                    <div class="dot"></div>
+
+                    <div>
+
+                        <div class="maintenance-title">
+                            Piranómetros
+                        </div>
+
+                        <div class="maintenance-description">
+                            Inspecciones semanales y mensuales
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="maintenance-row">
+
+                    <div class="dot"></div>
+
+                    <div>
+
+                        <div class="maintenance-title">
+                            CCTV + Perimetral
+                        </div>
+
+                        <div class="maintenance-description">
+                            Monitoreo mensual
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
 
-
-        <div class="chat">
-
-            <input
-                id="chatInput"
-                type="text"
-                placeholder="Escribe tu pregunta..."
-                onkeydown="if(event.key==='Enter') sendQuestion()"
-            >
-
-            <button onclick="sendQuestion()">
-                ENVIAR
-            </button>
-
-        </div>
-
-    </aside>
-
-</div>
+    </div>
 
 </main>
+
+
+<!-- =====================================================
+     EBCO INTELIGENTE
+===================================================== -->
+
+<aside class="ai-panel">
+
+
+    <div class="ai-header">
+
+        <div class="ai-title">
+            EBCO<span style="font-weight:normal;">Inteligente</span>
+        </div>
+
+        <div class="ai-subtitle">
+            ● Lecciones
+        </div>
+
+    </div>
+
+
+    <div class="ai-context">
+
+        <strong>
+            Santa Inés · Enero 2026
+        </strong>
+
+        <br><br>
+
+        Consulta las experiencias registradas para apoyar el análisis de operación y mantenimiento.
+
+    </div>
+
+
+    <div class="quick-title">
+        CONSULTAS RÁPIDAS
+    </div>
+
+
+    <div class="quick-grid">
+
+        <button class="quick-btn"
+                onclick="askAI('¿Qué problemas se presentaron?')">
+            ¿Qué problemas se<br>presentaron?
+        </button>
+
+        <button class="quick-btn"
+                onclick="askAI('¿Qué mantenimientos se realizaron?')">
+            ¿Qué mantenimientos se<br>realizaron?
+        </button>
+
+        <button class="quick-btn"
+                onclick="askAI('¿Qué fallas se repitieron?')">
+            ¿Qué fallas se<br>repitieron?
+        </button>
+
+        <button class="quick-btn"
+                onclick="askAI('¿Qué acciones se ejecutaron?')">
+            ¿Qué acciones se<br>ejecutaron?
+        </button>
+
+        <button class="quick-btn"
+                onclick="askAI('¿Qué se aprendió?')">
+            ¿Qué se aprendió?
+        </button>
+
+        <button class="quick-btn"
+                onclick="askAI('¿Qué recomendarías?')">
+            ¿Qué recomendarías?
+        </button>
+
+    </div>
+
+
+    <div class="ai-response">
+
+        <div class="response-title">
+            ¿Qué se aprendió?
+        </div>
+
+        <div class="response-box">
+
+            <ul>
+
+                <li>
+                    La disponibilidad y generación deben analizarse considerando las restricciones externas.
+                </li>
+
+                <li>
+                    Las perturbaciones de red pueden generar desconexiones y variaciones de generación.
+                </li>
+
+                <li>
+                    La calidad de las comunicaciones es relevante para la trazabilidad operacional.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <div class="ai-response">
+
+        <div class="response-title">
+            ¿Qué fallas se repitieron?
+        </div>
+
+        <div class="response-box">
+
+            <ul>
+
+                <li>
+                    Se registran desconexiones asociadas a PDOP y EF1+.
+                </li>
+
+                <li>
+                    Persisten intervalos de pérdida de generación asociados a problemas de comunicaciones.
+                </li>
+
+                <li>
+                    El parque continúa ajustado al 90% en control de generación.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <div class="chat-area">
+
+        <input
+            id="chatInput"
+            class="chat-input"
+            type="text"
+            placeholder="Escribe tu pregunta..."
+            onkeydown="if(event.key==='Enter') sendQuestion();"
+        >
+
+        <button
+            class="send-btn"
+            onclick="sendQuestion()">
+            ENVIAR
+        </button>
+
+    </div>
+
+</aside>
 
 </div>
 
@@ -1229,13 +1197,14 @@ select,
 <script>
 
 /* =========================================================
-   GRÁFICO DE GENERACIÓN
+   GRÁFICO
 ========================================================= */
 
 const values = [
-    72,76,70,80,84,77,74,82,79,72,
-    68,76,81,85,79,73,82,79,75,69,
-    78,83,76,72,79,84,78,75,82,77
+    82,79,76,72,80,84,77,25,20,68,
+    75,82,28,77,81,84,79,87,82,78,
+    74,80,83,79,68,86,82,80,79,84,
+    88
 ];
 
 const chart = document.getElementById("chart");
@@ -1248,184 +1217,105 @@ values.forEach(value => {
 
     bar.style.height = value + "%";
 
-    bar.title = "Generación: " + value + "%";
-
     chart.appendChild(bar);
 
 });
 
 
 /* =========================================================
-   CAMBIO DE PARQUE
-========================================================= */
-
-document.getElementById("parque").addEventListener("change", function(){
-
-    const parque = this.value;
-
-    document.querySelector(".ai-context strong").textContent =
-        parque + " · " +
-        document.getElementById("periodo").value;
-
-});
-
-
-/* =========================================================
-   CAMBIO DE PERÍODO
-========================================================= */
-
-document.getElementById("periodo").addEventListener("change", function(){
-
-    const periodo = this.value;
-
-    const parque =
-        document.getElementById("parque").value;
-
-    document.querySelector(".ai-context strong").textContent =
-        parque + " · " + periodo;
-
-});
-
-
-/* =========================================================
-   LOGIN DEMO
-========================================================= */
-
-function login(){
-
-    const usuario =
-        document.getElementById("usuario").value;
-
-    if(usuario.trim() === ""){
-
-        alert("Ingrese un usuario.");
-
-        return;
-    }
-
-    alert(
-        "Acceso habilitado para el usuario: " +
-        usuario +
-        "\n\nProducto de prueba y uso académico."
-    );
-
-}
-
-
-/* =========================================================
-   RESPUESTAS DEL MÓDULO INTELIGENTE
+   ASISTENTE INTELIGENTE
 ========================================================= */
 
 function askAI(question){
 
-    const container =
-        document.getElementById("aiContent");
+    const title = document.querySelector(".response-title");
+    const box = document.querySelector(".response-box");
 
-    let answer = "";
+    title.textContent = question;
+
+    let response = "";
 
     if(question.includes("problemas")){
 
-        answer = `
-            <ul>
-                <li>Información operacional distribuida entre distintos sistemas.</li>
-                <li>Pérdidas o distorsiones de información durante la reportabilidad.</li>
-                <li>Tiempo elevado destinado a preparar informes.</li>
-                <li>Limitaciones de comunicación entre plataformas.</li>
-            </ul>
+        response = `
+        <ul>
+            <li>Se registraron problemas de comunicación en GPM.</li>
+            <li>Se presentaron restricciones asociadas a la red.</li>
+            <li>Se registraron eventos operacionales que afectaron la generación.</li>
+        </ul>
         `;
 
     }
-
     else if(question.includes("mantenimientos")){
 
-        answer = `
-            <ul>
-                <li>Mantención semestral de tableros.</li>
-                <li>Lavado de paneles.</li>
-                <li>Inspecciones de piranómetros.</li>
-                <li>Monitoreo de CCTV y perímetro.</li>
-            </ul>
+        response = `
+        <ul>
+            <li>Mantención de tableros.</li>
+            <li>Lavado de paneles.</li>
+            <li>Inspecciones de piranómetros.</li>
+            <li>Monitoreo CCTV y perímetro.</li>
+        </ul>
         `;
 
     }
-
     else if(question.includes("fallas")){
 
-        answer = `
-            <ul>
-                <li>Desconexiones asociadas a eventos de protección.</li>
-                <li>Pérdidas de generación vinculadas a problemas de comunicación.</li>
-                <li>Variaciones de generación producto de restricciones externas.</li>
-            </ul>
+        response = `
+        <ul>
+            <li>Desconexiones asociadas a eventos EF1+.</li>
+            <li>Problemas de comunicación.</li>
+            <li>Pérdidas de generación asociadas a restricciones externas.</li>
+        </ul>
         `;
 
     }
-
     else if(question.includes("acciones")){
 
-        answer = `
-            <ul>
-                <li>Seguimiento de las variables operacionales.</li>
-                <li>Revisión de alarmas.</li>
-                <li>Coordinación de mantenimiento.</li>
-                <li>Monitoreo de disponibilidad y generación.</li>
-            </ul>
+        response = `
+        <ul>
+            <li>Seguimiento de eventos operacionales.</li>
+            <li>Revisión de comunicaciones.</li>
+            <li>Monitoreo de restricciones de red.</li>
+            <li>Programación de actividades de mantenimiento.</li>
+        </ul>
         `;
 
     }
-
     else if(question.includes("aprendió")){
 
-        answer = `
-            <ul>
-                <li>La información debe estar centralizada para facilitar el control operacional.</li>
-                <li>La calidad de los datos es crítica para la toma de decisiones.</li>
-                <li>La automatización debe reducir actividades repetitivas de reportabilidad.</li>
-            </ul>
+        response = `
+        <ul>
+            <li>La disponibilidad debe analizarse junto con las restricciones externas.</li>
+            <li>La calidad de los datos y comunicaciones es clave para el control operacional.</li>
+            <li>La trazabilidad permite identificar patrones y recurrencia de fallas.</li>
+        </ul>
         `;
 
     }
-
     else if(question.includes("recomendarías")){
 
-        answer = `
-            <ul>
-                <li>Estandarizar las fuentes de información.</li>
-                <li>Reducir actividades manuales de consolidación.</li>
-                <li>Implementar validaciones de calidad de datos.</li>
-                <li>Integrar IA como apoyo al análisis operacional.</li>
-                <li>Mantener validación humana antes de emitir información externa.</li>
-            </ul>
+        response = `
+        <ul>
+            <li>Centralizar los datos operacionales.</li>
+            <li>Automatizar la generación de reportes.</li>
+            <li>Identificar automáticamente eventos recurrentes.</li>
+            <li>Utilizar IA para apoyar el análisis operacional.</li>
+        </ul>
         `;
 
     }
-
     else{
 
-        answer = `
-            <ul>
-                <li>La consulta puede analizarse utilizando la información operacional disponible.</li>
-                <li>Se recomienda revisar datos, eventos y mantenimientos asociados al período seleccionado.</li>
-            </ul>
+        response = `
+        <p>
+        Para esta consulta se recomienda revisar los datos operacionales,
+        eventos de mantenimiento, disponibilidad y restricciones del parque.
+        </p>
         `;
 
     }
 
-
-    container.innerHTML += `
-
-        <div class="question">
-            ${question}
-        </div>
-
-        <div class="answer">
-            ${answer}
-        </div>
-
-    `;
-
-    container.scrollTop =
-        container.scrollHeight;
+    box.innerHTML = response;
 
 }
 
@@ -1436,16 +1326,12 @@ function askAI(question){
 
 function sendQuestion(){
 
-    const input =
-        document.getElementById("chatInput");
+    const input = document.getElementById("chatInput");
 
-    const question =
-        input.value.trim();
+    const question = input.value.trim();
 
-    if(question === ""){
-
+    if(!question){
         return;
-
     }
 
     askAI(question);
@@ -1453,6 +1339,22 @@ function sendQuestion(){
     input.value = "";
 
 }
+
+
+/* =========================================================
+   CAMBIO DE PERÍODO
+========================================================= */
+
+document
+.getElementById("periodSelect")
+.addEventListener("change", function(){
+
+    const period = this.value;
+
+    document.querySelector(".ai-context strong").textContent =
+        "Santa Inés · " + period;
+
+});
 
 </script>
 
